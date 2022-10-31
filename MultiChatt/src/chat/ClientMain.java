@@ -9,7 +9,6 @@ import java.awt.event.KeyEvent;
 import java.io.IOException;
 import java.net.InetAddress;
 import java.net.Socket;
-import java.util.List;
 import java.util.Vector;
 
 import javax.swing.DefaultListModel;
@@ -28,9 +27,8 @@ import javax.swing.border.EmptyBorder;
 import org.json.simple.JSONObject;
 
 public class ClientMain extends JFrame {
-	
 	ClientThread ct;
-	DefaultListModel userListModel = new DefaultListModel<>();	//바뀐 부분
+	DefaultListModel userListModel = new DefaultListModel();
 	
 	private JPanel contentPane;
 	private JLabel lblNewLabel;
@@ -49,9 +47,6 @@ public class ClientMain extends JFrame {
 	private JLabel lblNewLabel_2;
 	private JLabel lblNewLabel_3;
 
-	/**
-	 * Launch the application.
-	 */
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -253,13 +248,6 @@ public class ClientMain extends JFrame {
 	public JButton getBtnWhisper() {
 		if (btnWhisper == null) {
 			btnWhisper = new JButton("귓속말");
-			btnWhisper.addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent e) {
-					String msg = tfMessage.getText();
-					List<String> users = getList().getSelectedValuesList();
-					ct.sendWhisper(users, msg);
-				}
-			});
 			btnWhisper.setEnabled(false);
 			btnWhisper.setBounds(673, 409, 97, 23);
 		}
