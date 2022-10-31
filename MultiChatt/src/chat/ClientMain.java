@@ -9,6 +9,7 @@ import java.awt.event.KeyEvent;
 import java.io.IOException;
 import java.net.InetAddress;
 import java.net.Socket;
+import java.util.List;
 import java.util.Vector;
 
 import javax.swing.DefaultListModel;
@@ -252,6 +253,13 @@ public class ClientMain extends JFrame {
 	public JButton getBtnWhisper() {
 		if (btnWhisper == null) {
 			btnWhisper = new JButton("귓속말");
+			btnWhisper.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					String msg = tfMessage.getText();
+					List<String> users = getList().getSelectedValuesList();
+					ct.sendWhisper(users, msg);
+				}
+			});
 			btnWhisper.setEnabled(false);
 			btnWhisper.setBounds(673, 409, 97, 23);
 		}

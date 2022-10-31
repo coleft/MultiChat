@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.net.Socket;
+import java.util.List;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -121,6 +122,20 @@ public class ClientThread extends Thread{
 			bw.flush();
 		}catch(Exception ex) {
 			ex.printStackTrace();
+		}
+	}
+	
+	public void sendWhisper(List<String> users, String msg) {
+		JSONObject obj = new JSONObject();
+		obj.put("user", main.getTfUser().getText());	//만약에 매개변수 하나 추가해서 user 이름 추가할 수 있다.
+		obj.put("command", ServerMain.WHISPER);
+		obj.put("message", msg);
+		obj.put("useres", users);
+		try {
+			bw.write(obj.toJSONString() + "/n");
+			bw.flush();
+		} catch (IOException e) {
+			e.printStackTrace();
 		}
 	}
 	
